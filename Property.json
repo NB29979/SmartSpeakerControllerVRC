@@ -1,0 +1,16 @@
+{
+    "MQTT":{
+        "HOST" : "mqtt.beebotte.com",
+        "TOPIC" : "TOPIC",
+        "TOKEN" : "TOKEN",
+        "CACEPT" : "mqtt.beebotte.com.pem",
+        "PORT" : 8883
+    },
+    "OSC":{
+        "LOCALIP" : "127.0.0.1",
+        "LOCALPORT" : 9000
+    },
+    "DeepL":{
+        "AUTH_KEY" : "APIKEY"
+    }
+}
