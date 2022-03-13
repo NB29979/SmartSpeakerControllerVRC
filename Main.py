@@ -57,28 +57,22 @@ def on_message(client, userdata, msg):
         send_translated_message(translated_input)
 
 
-def send_message(address, value):
+def send_message(address, value, duration):
     osc_client = udp_client.SimpleUDPClient(LOCALIP, LOCALPORT)
     osc_client.send_message(address, value)
-    time.sleep(0.05)
-
-
-def send_message_(address, value):
-    osc_client = udp_client.SimpleUDPClient(LOCALIP, LOCALPORT)
-    osc_client.send_message(address, value)
-    time.sleep(0.02)
+    time.sleep(duration)
 
 
 def send_jumping():
-    send_message("/avatar/parameters/fly", 1)
-    send_message("/input/Jump", 1)
-    send_message("/input/Jump", 0)
+    send_message("/avatar/parameters/fly", 1, 0.05)
+    send_message("/input/Jump", 1, 0.05)
+    send_message("/input/Jump", 0, 0.05)
 
 
 def initialize_character_table():
     for i in range(0,70):
-        send_message_("/avatar/parameters/MotionTime_Index", (1.0/70)*i)
-        send_message_("/avatar/parameters/MotionTime_Value", 0.0)
+        send_message("/avatar/parameters/MotionTime_Index", (1.0/70)*i, 0.02)
+        send_message("/avatar/parameters/MotionTime_Value", 0.0, 0.02)
 
 
 def translate_message(input_text):
@@ -109,8 +103,8 @@ def send_translated_message(translated_text):
     print(converted_index_list)
 
     for tableIndex, character_value in enumerate(converted_index_list):
-        send_message("/avatar/parameters/MotionTime_Index", (1.0/70)*(tableIndex+1))
-        send_message("/avatar/parameters/MotionTime_Value", (1.0/60)*character_value)
+        send_message("/avatar/parameters/MotionTime_Index", (1.0/70)*(tableIndex+1), 0.05)
+        send_message("/avatar/parameters/MotionTime_Value", (1.0/60)*character_value, 0.05)
     time.sleep(2.5)
     initialize_character_table()
 
